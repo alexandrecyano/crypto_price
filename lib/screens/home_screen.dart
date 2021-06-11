@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,16 +15,50 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Cryptos by Price'),
       ),
       body: Container(
-        decoration: BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Theme.of(context).primaryColor,
-            Colors.grey[900]!,
-          ],
-        )),
-      ),
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Theme.of(context).primaryColor,
+                Colors.grey[900]!,
+              ],
+            ),
+          ),
+          child: ListView.builder(
+            itemCount: 20,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${++index}',
+                      style: TextStyle(
+                        color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                title: Text(
+                  'Bitcoin',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  'BTC',
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                trailing: Text(
+                  '\30000.0000 EUR',
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              );
+            },
+          )),
     );
   }
 }
