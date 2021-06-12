@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: const TextStyle(color: Colors.white70),
                 ),
                 trailing: Text(
-                  '\30000.0000 EUR',
+                  '€ 30000.0000',
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.w600,
