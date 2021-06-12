@@ -1,5 +1,6 @@
 import 'dart:convert';
-
+import 'package:crypto_price/models/coin_model.dart';
+import 'package:crypto_price/models/failure_module.dart';
 import 'package:http/http.dart' as http;
 
 class CrytoRepository {
@@ -11,13 +12,20 @@ class CrytoRepository {
   CrytoRepository({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  getTopCoins() async {
+  Future<List<Coin>> getTopCoins() async {
     final requestUrl =
         '${_baseUrl}data/top/totalvolfull?limit=$perPage&tsym=EUR';
-    final response = await _httpClient.get(Uri.parse(requestUrl));
-    if (response.statusCode == 200) {
-      Map<String, dynamic> data = json.decode(response.body);
-      final coinList = data['Data'];
+    try {
+      final response = await _httpClient.get(Uri.parse(requestUrl));
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = json.decode(response.body);
+        final coinList = data['Data'];
+        return coinList.map((e) => Coin.fromMap(e)).toList();
+      }
+      return [];
+    } catch (err) {
+      print(err);
+      throw Failure(message: err.toString());
     }
   }
 }
