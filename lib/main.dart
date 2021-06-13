@@ -1,7 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:crypto_price/screens/home_screen.dart';
 
 void main() {
+  EquatableConfig.stringify = kDebugMode;
   runApp(MyApp());
 }
 
